@@ -90,9 +90,47 @@ Terraform modules are just snippets of code that can be called from within other
 <img src="./images/tf_remote.png">
 
 
+## Importing AWS Resources into Terraform
+
+Importing existing infrastructure into Terraform is a slow process that must be done with caution. One of the key takeaways is to understand that importing infrastructure does not create a Terraform configuration automatically. The configuration must be created manually. The typical workflow for importing existing infrastructure into Terraform is as follows:
+
+<img src="./images/tf_wf.png">
+
+Existing infrastructure is imported using the terraform import command, then the Terraform configuration file is modified to sync with the existing infrastructure settings. Afterward, terraform plan and terraform apply are used to verify both the Terraform configuration, state, and existing resources are in sync. 
+
+Terraform requires the ID of the resource to be imported. In this case, the VPC ID is required since a VPC is being imported. If a Subnet were to be imported, Terraform would require a Subnet ID.
 
 
+```
+**main.tf**
+resource "aws_vpc" "dev" {}
+```
 
+```
+VpcID=$(aws ec2 describe-vpcs --region us-west-2 --filters Name=tag:Name,Values='Web VPC' --output text --query "Vpcs[].VpcId") && echo $VpcID
+//vpc-078251144ebb7a53b
+terraform import aws_vpc.dev $VpcID
+```
+
+<img src="./images/tf_import.png">
+
+
+## Conditional Logic in Terraform Configurations
+
+<img src="./images/tf_cond.png">
+
+<img src="./images/tf_cond_var.png"> <img src="./images/tf_cond_main.png">
+
+
+## Creating Loops in the Terraform Configuration and Scaling Resources
+
+Dynamic blocks can be used for resources that contain repeatable configuration blocks. Instead of repeating several ebs_block_device blocks, a dynamic block is used to simplify the code. This is done by combining the dynamic block with a for_each loop inside. 
+
+<img src="./images/tf_loop_dynamic.png">
+
+Count allows for creating multiple instances of a resource block. Almost all resource blocks can use the count attribute. It is simply the number of times to create the resource block. It can also be used as conditional logic. In this case, the value of count is a conditional expression. If var.associate_public_ip_address is true set the count value to 1, if false set it to 0. This allows resource blocks to be created conditionally. In this example, a public IP address is not created if var.associate_public_ip_address is set to false.
+
+<img src="./images/tf_loop_count.png">
 
 
 
