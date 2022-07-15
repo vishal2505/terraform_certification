@@ -15,7 +15,7 @@
 
 The format of resource block configurations is as follows:
 
-<<block type>> <<resource type>> <<local name/label>>
+```<block type> <resource type> <local name/label>```
 
    
 ## Terraform Object Rerference
