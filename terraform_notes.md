@@ -1,5 +1,16 @@
 # Terraform
 
+
+## Infrastructure as code
+Benefits
+1. Version Controlled and can be stored in a repository alongside application code
+2. Programatically deploy infrastructure
+3. The reduction of misconfigurations that could lead to security vulnerabilities asnd unplanned downtime
+4. Standardize your deployment workflow
+
+Reducing vulnerabilities in your publicly-facing applications is **NOT** a benefit of using IaC since IaC is geared towards deploying infrastructure and applications, but not determining whether your application is secure.
+
+
 ### Terraform is infrasturcutre automation.
 
 ### Terraform is available for macOS, FreeBSD, OpenBSD, Linux, Solaris, and Windows. There is no Terraform binary for AIX.
@@ -113,6 +124,22 @@ var.aws_region
 
 #### Local Variables Example
 
+A local value assigns a name to an expression, so you can use the name multiple times within a module instead of repeating the expression.
+
+```
+locals {
+  # Ids for multiple sets of EC2 instances, merged together
+  instance_ids = concat(aws_instance.blue.*.id, aws_instance.green.*.id)
+}
+
+locals {
+  # Common tags to be assigned to all resources
+  common_tags = {
+    Service = local.service_name
+    Owner   = local.owner
+  }
+}
+```
 <img src="./images/locals_var.png">
 
 ### Supply Variable Values
