@@ -63,14 +63,16 @@ terraform init  --> terraform plan  --> terraform apply
 7. **terraform taint** - Deprecated now in terrafornm version 0.15.2. and higher. The terraform taint command informs Terraform that a particular object has become degraded or damaged. Terraform represents this by marking the object as "tainted" in the Terraform state, and Terraform will propose to replace it in the next plan you create.
 8. **terraform login [hostname]** - login into terraform enterprise. Saves the api token
 9. **terraform logout** - logout from terraform cloud. Used to remove credentials stored by terraform login.
+10. The **terraform refresh** command updates state data to match the real-world condition of the managed resources. This is done automatically during plans and applies, but not when interacting with state directly.
+11. **terraform apply -refresh-only** To instruct Terraform to refresh the state file based on the current configuration of managed resources, you can use the terraform apply -refresh-only command. If Terraform discovers drift, it will update the state file with the changes.
+
+Note that terraform refresh used to be the correct command here, but that command is deprecated. It might show up on the exam though.
 
 ## Terrafrom state commands 
 
 1. The **terraform state list**  command shows the resource addresses for every resource Terraform knows about in a configuration, optionally filtered by partial resource address.
 
 2. The **terraform state show** command displays detailed state data about one resource.
-
-3. The **terraform refresh** command updates state data to match the real-world condition of the managed resources. This is done automatically during plans and applies, but not when interacting with state directly.
 
 
 ## Variables and Outputs
@@ -293,7 +295,8 @@ https://learn.hashicorp.com/tutorials/terraform/secrets-vault#provision-compute-
 
 ## Terraform Enterprise
    
-A Terraform Enterprise install that is provisioned on a network that does not have Internet access is generally known as an **air-gapped install**. These types of installs require you to pull updates, providers, etc. from external sources vs. being able to download them directly.
+1. A Terraform Enterprise install that is provisioned on a network that does not have Internet access is generally known as an **air-gapped install**. These types of installs require you to pull updates, providers, etc. from external sources vs. being able to download them directly.
+2. Single Sign-On is a feature of Terraform Enterprise and Terraform Cloud for Business. It is NOT available in Terraform Cloud (free tier).
 
 
 
