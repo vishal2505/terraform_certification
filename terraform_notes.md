@@ -8,13 +8,23 @@
 2. Resources
 3. Data Sources   (associated witht the providers)
 
+
+## Forat of Resource Block Configuration
+
+The format of resource block configurations is as follows:
+
+<block type> "<resource type>" "<local name/label>"
+
+   
 ## Terraform Object Rerference
 
 <resource_type>.<object_name>.<attribute_name>
 
+   
 ## Workflow
 
 terraform init  --> terraform plan  --> terraform apply
+
 
 ## Terrfaomr CLI Commands
 
@@ -220,6 +230,18 @@ resource "aws_instance" "web" {
   }
 }
 ```
+
+## Functions in Terraform
+
+## String Functions
+
+1. replace
+2. join
+3. format
+
+## Type conversion Functions
+
+**tostring** is not a string function, it is a type conversion function. tostring converts its argument to a string value.
 
 
 
