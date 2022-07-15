@@ -1,8 +1,8 @@
 # Terraform
 
-## Terraform is infrasturcutre automation.
+### Terraform is infrasturcutre automation.
 
-## Terraform is available for macOS, FreeBSD, OpenBSD, Linux, Solaris, and Windows. There is no Terraform binary for AIX.
+### Terraform is available for macOS, FreeBSD, OpenBSD, Linux, Solaris, and Windows. There is no Terraform binary for AIX.
 
 ## Terraform Object Types
 
