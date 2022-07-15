@@ -52,7 +52,7 @@ terraform init  --> terraform plan  --> terraform apply
 ## Terrfaomr CLI Commands
 
 
-1. terraform init
+1. **terraform init** - providers/plugins are downloaded to .terraform/providers and modules are downloaded to the .terraform/modules directory.
 2. terrafrom plan
 3. terraform apply
     **replace -** If you untent to force replacement of a particular object evern though there are no configuraiton changes use -replaxe option with terraform apply.
