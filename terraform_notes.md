@@ -2,6 +2,8 @@
 
 ## Terraform is infrasturcutre automation.
 
+## Terraform is available for macOS, FreeBSD, OpenBSD, Linux, Solaris, and Windows. There is no Terraform binary for AIX.
+
 ## Terraform Object Types
 
 1. Providers
@@ -9,17 +11,38 @@
 3. Data Sources   (associated witht the providers)
 
 
-## Forat of Resource Block Configuration
+## Format of Resource Block Configuration
 
 The format of resource block configurations is as follows:
 
-<block type> "<resource type>" "<local name/label>"
+<<block type>> <<resource type>> <<local name/label>>
 
    
 ## Terraform Object Rerference
 
 <resource_type>.<object_name>.<attribute_name>
 
+
+## Variable types in Terraform
+   
+1. string
+2. number
+3. bool
+4. list (or tuple)
+5. map (or object). 
+   
+## Functions in Terraform
+
+## String Functions
+
+1. replace
+2. join
+3. format
+
+## Type conversion Functions
+
+**tostring** is not a string function, it is a type conversion function. tostring converts its argument to a string value.
+   
    
 ## Workflow
 
@@ -112,6 +135,11 @@ Terraform modules are just snippets of code that can be called from within other
 
 
 <img src="./images/modules.png">
+   
+1. Modules repositories must use this thre-part name format - ```terraform-<provider>-<name>```
+2. Registeries uses tag to identify module versions. Release tag names must be in the format x.y.z and can optionally be prefixed with a **v**. 
+3. The module must be on GitHub and must be a public repo. This is only a requirement for the public registry. If you're using a private registry, you may ignore this requirement.
+4. Both the **terraform get** and **terraform init** commands will install and update modules. The terraform init command will also initialize backends and install plugins.
 
 
 ## Terraform Remote state
@@ -231,18 +259,41 @@ resource "aws_instance" "web" {
 }
 ```
 
-## Functions in Terraform
+## Retrieving data from data sources
+   
+It is important to consider that Terraform reads from data sources during the **plan** phase and writes the result into the plan. For something like a Vault token which has an explicit TTL, the apply must be run before the data, or token, in this case, expires, otherwise, Terraform will fail during the apply phase.
+   
+Another example of this is AWS credentials:
 
-## String Functions
+The token is generated from the moment the configuration retrieves the temporary AWS credentials (on terraform plan or terraform apply). If the apply run is confirmed after the 120 seconds, the run will fail because the credentials used to initialize the Terraform AWS provider has expired. For these instances or large multi-resource configurations, you may need to adjust the default_lease_ttl_seconds.
 
-1. replace
-2. join
-3. format
+https://learn.hashicorp.com/tutorials/terraform/secrets-vault#provision-compute-instance
+   
+   
+## Terraform Cloud supports the following VCS providers as of January 2022:
 
-## Type conversion Functions
+  - GitHub
 
-**tostring** is not a string function, it is a type conversion function. tostring converts its argument to a string value.
+  - GitHub.com (OAuth)
 
+  - GitHub Enterprise
+
+  - GitLab.com
+
+  - GitLab EE and CE
+
+  - Bitbucket Cloud
+
+  - Bitbucket Server
+
+  - Azure DevOps Server
+
+  - Azure DevOps Services
+
+
+## Terraform Enterprise
+   
+A Terraform Enterprise install that is provisioned on a network that does not have Internet access is generally known as an **air-gapped install**. These types of installs require you to pull updates, providers, etc. from external sources vs. being able to download them directly.
 
 
 
