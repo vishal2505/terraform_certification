@@ -10,7 +10,10 @@ This repo includes various resources and practice exams that helped me pass the 
 
 ## Resources
 
-Best Course on Udemy by Zeal Vora [Terraform Associate](https://www.udemy.com/course/terraform-beginner-to-advanced/)
+- Best Course on Udemy by Zeal Vora [Terraform Associate](https://www.udemy.com/course/terraform-beginner-to-advanced/)
+
+- Important points for exams [pdfs from Zeal Vora](UdemyCourse/Terraform+Imp+Pointers+Exams.pdf)
+- My Cheat Sheet - [Terraform_Notes](terraform_notes.md)
 
 ## Practice Exams
 
@@ -18,7 +21,7 @@ Best Course on Udemy by Zeal Vora [Terraform Associate](https://www.udemy.com/co
 
 ## My Certificate
 
-[My Certificate](Certificate/HashiCorp_Certified__Terraform_Associate_Badge20220720-46-15l0mtv)
+[My Certificate](https://github.com/vishal2505/terraform_certification/blob/master/Certificate/HashiCorp_Certified__Terraform_Associate_Badge20220720-46-15l0mtv.pdf)
 
 
 
