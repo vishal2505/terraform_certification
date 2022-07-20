@@ -34,6 +34,35 @@ The format of resource block configurations is as follows:
 <resource_type>.<object_name>.<attribute_name>
 
 
+## Terraform Newer Version Update
+
+From 0.13 onwards, Terraform requires explicit source information for any providers that are not HashiCorp maintained, using a new syntax in the **required_providers** nested block inside the terraform configuration block.
+
+### HasiCorp Maintained
+```
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "PUT-YOUR-ACCESS-KEY-HERE"
+  secret_key = "PUT-YOUR-SECRET-KEY-HERE"
+}
+```
+
+### Non-HasiCorp Maintained
+```
+terraform {
+  required_providers {
+    digitalocean = {
+      source = "digitalocean/digitalocean"
+      version = "2.5.0"
+    }
+  }
+}
+
+provider "digitalocean" {
+  token = "PUT-YOUR-TOKEN-HERE"
+}
+```
+
 ## Variable types in Terraform
    
 1. string
@@ -68,7 +97,7 @@ terraform init  --> terraform plan  --> terraform apply
 3. terraform apply
     **replace -** If you untent to force replacement of a particular object evern though there are no configuraiton changes use -replaxe option with terraform apply.
     for Example: terraform apply -replace="aws_instance.example[0]"
-4. terraform destroy
+4. **terraform destroy** - To destroy a specific resource use -target flag.
 5. **terraform providers** - Used to find what provider name you are dpeloying
 6. **terraform providers Schema**  - print detialed schema for the providers used in the current configuration.
 7. **terraform taint** - Deprecated now in terrafornm version 0.15.2. and higher. The terraform taint command informs Terraform that a particular object has become degraded or damaged. Terraform represents this by marking the object as "tainted" in the Terraform state, and Terraform will propose to replace it in the next plan you create.
@@ -324,13 +353,5 @@ https://learn.hashicorp.com/tutorials/terraform/secrets-vault#provision-compute-
    
 1. A Terraform Enterprise install that is provisioned on a network that does not have Internet access is generally known as an **air-gapped install**. These types of installs require you to pull updates, providers, etc. from external sources vs. being able to download them directly.
 2. Single Sign-On is a feature of Terraform Enterprise and Terraform Cloud for Business. It is NOT available in Terraform Cloud (free tier).
-
-
-
-
-
-
-
-
 
 
